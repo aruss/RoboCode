@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C2D15312-5BE3-457A-AFFC-B80E17E0163C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>aruss.RoboCode</RootNamespace>
-    <AssemblyName>aruss.RoboCode</AssemblyName>
+    <RootNamespace>arusslabs</RootNamespace>
+    <AssemblyName>arusslabs.rc</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -79,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ARS3891.cs" />
+    <Compile Include="Math\MathUtils.cs" />
+    <Compile Include="ScanLog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,7 +1,7 @@
 ﻿using Robocode;
 using System.Drawing;
 
-namespace SampleCs
+namespace aruss
 {
     public class ARS3891 : AdvancedRobot
     {

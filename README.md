@@ -2,6 +2,7 @@
 
 About RoboCode: [http://robocode.sourceforge.net/](http://robocode.sourceforge.net/)
 
-Clone the project to C:\RoboCode\robots and build it. It will add a assembly into robots folder. 
+Debug robots in VS: [http://robowiki.net/wiki/Robocode/.NET/Debug_a_.NET_robot_in_Visual_Studio](http://robowiki.net/wiki/Robocode/.NET/Debug_a_.NET_robot_in_Visual_Studio)
+
 
 

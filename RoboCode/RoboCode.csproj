@@ -80,7 +80,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ARS3891.cs" />
+    <Compile Include="Logger\EnemyInfo.cs" />
+    <Compile Include="Logger\BattleLog.cs" />
+    <Compile Include="Debugger\VisualDebugger.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

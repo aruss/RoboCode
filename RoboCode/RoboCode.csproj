@@ -83,8 +83,11 @@
     <Compile Include="Logger\EnemyInfo.cs" />
     <Compile Include="Logger\BattleLog.cs" />
     <Compile Include="Debugger\VisualDebugger.cs" />
+    <Compile Include="Base\RobotBase.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

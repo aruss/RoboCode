@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 using Robocode;
+using arusslabs.Base;
 using arusslabs.Logger;
 
 namespace arusslabs.Debugger

@@ -6,7 +6,7 @@ using arusslabs.Logger;
 
 namespace arusslabs
 {
-    public class Ars3891 : RobotBase
+    public class ARS3891 : RobotBase
     {
         VisualDebugger vDebugger; 
         BattleLog log;

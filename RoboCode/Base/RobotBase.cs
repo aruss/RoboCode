@@ -18,83 +18,95 @@ namespace arusslabs.Base
 
     public abstract class RobotBase : AdvancedRobot
     {
-
         public event BattleEndedEventHandler BattleEndedEvent;
         public override void OnBattleEnded(BattleEndedEvent e)
         {
-            this.BattleEndedEvent.Invoke(this, e);
+            if (this.BattleEndedEvent != null)
+                this.BattleEndedEvent.Invoke(this, e);
         }
 
         public event BulletHitEventHandler BulletHitEvent;
         public override void OnBulletHit(BulletHitEvent e)
         {
-            this.BulletHitEvent.Invoke(this, e);
+            if (this.BulletHitEvent != null)
+                this.BulletHitEvent.Invoke(this, e);
         }
 
         public event BulletHitBulletEventHandler BulletHitBulletEvent;
         public override void OnBulletHitBullet(BulletHitBulletEvent e)
         {
-            this.BulletHitBulletEvent.Invoke(this, e);
+            if (this.BulletHitBulletEvent != null)
+                this.BulletHitBulletEvent.Invoke(this, e);
         }
 
         public event BulletMissedEventHandler BulletMissedEvent;
         public override void OnBulletMissed(BulletMissedEvent e)
         {
-            this.BulletMissedEvent.Invoke(this, e);
+            if (this.BulletMissedEvent != null)
+                this.BulletMissedEvent.Invoke(this, e);
         }
 
         public event DeathEventHandler DeathEvent;
         public override void OnDeath(DeathEvent e)
         {
-            this.DeathEvent.Invoke(this, e);
+            if (this.DeathEvent != null)
+                this.DeathEvent.Invoke(this, e);
         }
 
         public event HitByBulletEventHandler HitByBulletEvent;
         public override void OnHitByBullet(HitByBulletEvent e)
         {
-            this.HitByBulletEvent.Invoke(this, e);
+            if (this.HitByBulletEvent != null)
+                this.HitByBulletEvent.Invoke(this, e);
         }
 
         public event HitRobotEventHandler HitRobotEvent;
         public override void OnHitRobot(HitRobotEvent e)
         {
-            this.HitRobotEvent.Invoke(this, e);
+            if (this.HitRobotEvent != null)
+                this.HitRobotEvent.Invoke(this, e);
         }
 
         public event HitWallEventHandler HitWallEvent;
         public override void OnHitWall(HitWallEvent e)
         {
-            this.HitWallEvent.Invoke(this, e);
+            if (this.HitWallEvent != null)
+                this.HitWallEvent.Invoke(this, e);
         }
 
         public event RobotDeathEventHandler RobotDeathEvent;
         public override void OnRobotDeath(RobotDeathEvent e)
         {
-            this.RobotDeathEvent.Invoke(this, e);
+            if (this.RobotDeathEvent != null)
+                this.RobotDeathEvent.Invoke(this, e);
         }
 
         public event RoundEndedEventHandler RoundEndedEvent;
         public override void OnRoundEnded(RoundEndedEvent e)
         {
-            this.RoundEndedEvent.Invoke(this, e);
+            if (this.RoundEndedEvent != null)
+                this.RoundEndedEvent.Invoke(this, e);
         }
 
         public event ScannedRobotEventHandler ScannedRobotEvent;
         public override void OnScannedRobot(ScannedRobotEvent e)
         {
-            this.ScannedRobotEvent.Invoke(this, e);
+            if (this.ScannedRobotEvent != null)
+                this.ScannedRobotEvent.Invoke(this, e);
         }
 
         public event StatusEventHandler StatusEvent;
         public override void OnStatus(StatusEvent e)
         {
-            this.StatusEvent.Invoke(this, e);
+            if (this.StatusEvent != null)
+                this.StatusEvent.Invoke(this, e);
         }
 
         public event WinEventHandler WinEvent;
         public override void OnWin(WinEvent e)
         {
-            this.WinEvent.Invoke(this, e);
+            if (this.WinEvent != null) 
+                this.WinEvent.Invoke(this, e);
         }
     }
 }

@@ -1,5 +1,9 @@
-﻿using Robocode;
+﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using Robocode;
 using System.Drawing;
+using Robocode.Util;
 using arusslabs.Base;
 using arusslabs.Debugger;
 using arusslabs.Logger;
@@ -8,7 +12,7 @@ namespace arusslabs
 {
     public class ARS3891 : RobotBase
     {
-        VisualDebugger vDebugger; 
+        VisualDebugger vDebugger;
         BattleLog log;
         private bool dead = false;
 
@@ -20,54 +24,96 @@ namespace arusslabs
             this.log = new BattleLog(this, 500);
             this.vDebugger = new VisualDebugger(this);
 
-            // Do stuff as long alive 
-            while (!dead)
+            // Loop forever
+            while (true)
             {
-                Ahead(100); // Move ahead 100
-                TurnGunRight(360); // Spin gun around
-                Back(100); // Move back 100
-                TurnGunRight(360); // Spin gun around
+                try
+                {
+                    TurnGunRight(10); // Scans automatically
+                }
+                catch (Exception)
+                {
+                }
+
             }
         }
 
         public override void OnScannedRobot(ScannedRobotEvent e)
         {
-            // Debug.WriteLine("Scanned: " + e.Name);
-            this.Fire(1);
+            base.OnScannedRobot(e);
+
+            // Calculate exact location of the robot
+            double absoluteBearing = Heading + e.Bearing;
+            double bearingFromGun = Utils.NormalRelativeAngleDegrees(absoluteBearing - GunHeading);
+
+            // If it's close enough, fire!
+            if (Math.Abs(bearingFromGun) <= 3)
+            {
+                TurnGunRight(bearingFromGun);
+                // We check gun heat here, because calling Fire()
+                // uses a turn, which could cause us to lose track
+                // of the other robot.
+                if (GunHeat == 0)
+                {
+                    Fire(Math.Min(3 - Math.Abs(bearingFromGun), Energy - .1));
+                }
+            }
+            else
+            {
+                // otherwise just set the gun to turn.
+                // Note:  This will have no effect until we call scan()
+                TurnGunRight(bearingFromGun);
+            }
+            // Generates another scan event if we see a robot.
+            // We only need to call this if the gun (and therefore radar)
+            // are not turning.  Otherwise, scan is called automatically.
+            if (bearingFromGun == 0)
+            {
+                try
+                {
+                    this.Scan();
+                }
+                catch (Exception)
+                {
+                }
+
+            }
         }
 
+        private int dist = 50;
         public override void OnHitByBullet(HitByBulletEvent e)
         {
-            this.TurnLeft(90 - e.Bearing);
+            base.OnHitByBullet(e); 
+
+            this.TurnRight(Utils.NormalRelativeAngleDegrees(90 - (this.Heading - e.Heading)));
+
+            this.Ahead(dist);
+            dist *= -1;
+            this.Scan();
         }
 
+        /// <summary>
+        ///   onHitRobot:  Aim at it.  Fire Hard!
+        /// </summary>
         public override void OnHitRobot(HitRobotEvent e)
         {
+            base.OnHitRobot(e);
 
-        }
-
-        public override void OnDeath(DeathEvent e)
-        {
-            this.dead = true;
-        }
-
-        public override void OnWin(WinEvent e)
-        {
-
-        }
-
-        public override void OnStatus(StatusEvent e)
-        {
-            
+            var turnGunAmt = Utils.NormalRelativeAngleDegrees(e.Bearing + Heading - GunHeading);
+            this.TurnGunRight(turnGunAmt);
+            this.Fire(3);
         }
 
         public override void OnPaint(IGraphics graphics)
         {
+
+            vDebugger.DrawLogMeta(this.log, graphics); 
+            /*
             foreach (var info in this.log.InfoCurrent)
             {
                 vDebugger.DrawEnemyInfo(info.Value, graphics);
             }
-
+            */
             base.OnPaint(graphics);
         }
 

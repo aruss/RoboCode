@@ -8,7 +8,7 @@
     <ProjectGuid>{C2D15312-5BE3-457A-AFFC-B80E17E0163C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>arusslabs</RootNamespace>
-    <AssemblyName>arusslabs.rc</AssemblyName>
+    <AssemblyName>arusslabs.robocode</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

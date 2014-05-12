@@ -1,22 +1,52 @@
 ﻿using Robocode;
+using Robocode.RobotInterfaces;
 
 namespace arusslabs.Base
 {
-    public delegate void BattleEndedEventHandler(RobotBase sender, BattleEndedEvent e);
-    public delegate void BulletHitEventHandler(RobotBase sender, BulletHitEvent e);
-    public delegate void BulletHitBulletEventHandler(RobotBase sender, BulletHitBulletEvent e);
-    public delegate void BulletMissedEventHandler(RobotBase sender, BulletMissedEvent e);
-    public delegate void DeathEventHandler(RobotBase sender, DeathEvent e);
-    public delegate void HitByBulletEventHandler(RobotBase sender, HitByBulletEvent e);
-    public delegate void HitRobotEventHandler(RobotBase sender, HitRobotEvent e);
-    public delegate void HitWallEventHandler(RobotBase sender, HitWallEvent e);
-    public delegate void RobotDeathEventHandler(RobotBase sender, RobotDeathEvent e);
-    public delegate void ScannedRobotEventHandler(RobotBase sender, ScannedRobotEvent e);
-    public delegate void RoundEndedEventHandler(RobotBase sender, RoundEndedEvent e);
-    public delegate void StatusEventHandler(RobotBase sender, StatusEvent e);
-    public delegate void WinEventHandler(RobotBase sender, WinEvent e);
+    public delegate void BattleEndedEventHandler(IRobotBase sender, BattleEndedEvent e);
+    public delegate void BulletHitEventHandler(IRobotBase sender, BulletHitEvent e);
+    public delegate void BulletHitBulletEventHandler(IRobotBase sender, BulletHitBulletEvent e);
+    public delegate void BulletMissedEventHandler(IRobotBase sender, BulletMissedEvent e);
+    public delegate void DeathEventHandler(IRobotBase sender, DeathEvent e);
+    public delegate void HitByBulletEventHandler(IRobotBase sender, HitByBulletEvent e);
+    public delegate void HitRobotEventHandler(IRobotBase sender, HitRobotEvent e);
+    public delegate void HitWallEventHandler(IRobotBase sender, HitWallEvent e);
+    public delegate void RobotDeathEventHandler(IRobotBase sender, RobotDeathEvent e);
+    public delegate void ScannedRobotEventHandler(IRobotBase sender, ScannedRobotEvent e);
+    public delegate void RoundEndedEventHandler(IRobotBase sender, RoundEndedEvent e);
+    public delegate void StatusEventHandler(IRobotBase sender, StatusEvent e);
+    public delegate void WinEventHandler(IRobotBase sender, WinEvent e);
+    public delegate void PaintEventHandler(IRobotBase sender, IGraphics graphics);
 
-    public abstract class RobotBase : AdvancedRobot
+    public interface IRobotBase : IAdvancedRobot,  IAdvancedEvents, IInteractiveRobot, IPaintRobot, IBasicEvents3, IInteractiveEvents, IPaintEvents, IRunnable
+    {
+        event BattleEndedEventHandler BattleEndedEvent;
+        event BulletHitEventHandler BulletHitEvent;
+        event BulletHitBulletEventHandler BulletHitBulletEvent;
+        event BulletMissedEventHandler BulletMissedEvent;
+        event DeathEventHandler DeathEvent;
+        event HitByBulletEventHandler HitByBulletEvent;
+        event HitRobotEventHandler HitRobotEvent;
+        event HitWallEventHandler HitWallEvent;
+        event RobotDeathEventHandler RobotDeathEvent;
+        event RoundEndedEventHandler RoundEndedEvent;
+        event ScannedRobotEventHandler ScannedRobotEvent;
+        event StatusEventHandler StatusEvent;
+        event WinEventHandler WinEvent;
+        event PaintEventHandler PaintEvent;
+
+        double GunHeadingRadians { get; }
+        double HeadingRadians { get; }
+        double X { get; }
+        double Y { get; }
+
+        double BattleFieldHeight { get; }
+        double BattleFieldWidth { get; }
+
+        // add fields from AdvancedRobot implementation as required
+    }
+
+    public abstract class RobotBase : AdvancedRobot, IRobotBase
     {
         public event BattleEndedEventHandler BattleEndedEvent;
         public override void OnBattleEnded(BattleEndedEvent e)
@@ -107,6 +137,13 @@ namespace arusslabs.Base
         {
             if (this.WinEvent != null) 
                 this.WinEvent.Invoke(this, e);
+        }
+
+        public event PaintEventHandler PaintEvent; 
+        public override void OnPaint(IGraphics graphics)
+        {
+            if (this.PaintEvent != null)
+                this.PaintEvent.Invoke(this, graphics);
         }
     }
 }

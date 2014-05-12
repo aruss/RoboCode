@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoboCode", "RoboCode\RoboCode.csproj", "{C2D15312-5BE3-457A-AFFC-B80E17E0163C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arusslabs.RoboCode", "RoboCode\arusslabs.RoboCode.csproj", "{C2D15312-5BE3-457A-AFFC-B80E17E0163C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arusslabs.RoboCode.Tests", "RoboCode.Tests\arusslabs.RoboCode.Tests.csproj", "{A27E185C-030A-4CF1-8831-4D7FBF0617FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{C2D15312-5BE3-457A-AFFC-B80E17E0163C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2D15312-5BE3-457A-AFFC-B80E17E0163C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2D15312-5BE3-457A-AFFC-B80E17E0163C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A27E185C-030A-4CF1-8831-4D7FBF0617FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A27E185C-030A-4CF1-8831-4D7FBF0617FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A27E185C-030A-4CF1-8831-4D7FBF0617FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A27E185C-030A-4CF1-8831-4D7FBF0617FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

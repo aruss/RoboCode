@@ -7,58 +7,62 @@ namespace arusslabs.Logger
 {
     public class BattleLog
     {
-        public RobotBase Robot;
-        public int Capacity; 
-        public IDictionary<string, EnemyInfo> InfoCurrent;
-        public IDictionary<string, Queue<EnemyInfo>> InfoTrace;
+        public IRobotBase Robot;
+        public int Capacity;
+        public IDictionary<string, Stack<EnemyInfo>> InfoTrace;
 
-        public BattleLog(RobotBase robot, int capacity)
+        public BattleLog(IRobotBase robot, int capacity = 100)
         {
             this.Robot = robot;
             this.Robot.RobotDeathEvent += this.OnRobotDeathEvent;
             this.Robot.ScannedRobotEvent += this.OnScannedRobotEvent;
 
-            this.Capacity = capacity; 
-            this.InfoCurrent = new Dictionary<string, EnemyInfo>();
-            this.InfoTrace = new Dictionary<string, Queue<EnemyInfo>>();
+            this.Capacity = capacity;
+            this.InfoTrace = new Dictionary<string, Stack<EnemyInfo>>();
         }
 
-        private void OnRobotDeathEvent(RobotBase sender, RobotDeathEvent evnt)
+        #region private members
+
+        private void OnRobotDeathEvent(IRobotBase sender, RobotDeathEvent evnt)
         {
-            if (this.InfoCurrent.ContainsKey(evnt.Name))
+            if (this.InfoTrace.ContainsKey(evnt.Name))
             {
-                this.InfoCurrent.Remove(evnt.Name); 
+                this.InfoTrace.Remove(evnt.Name);
             }
         }
 
-        private void OnScannedRobotEvent(RobotBase sender, ScannedRobotEvent evnt)
+        private void OnScannedRobotEvent(IRobotBase sender, ScannedRobotEvent evnt)
         {
-            EnemyInfo info;
-            //Queue<EnemyInfo> queue; 
+            Stack<EnemyInfo> list;
 
-            if (this.InfoCurrent.ContainsKey(evnt.Name))
+            if (this.InfoTrace.ContainsKey(evnt.Name))
             {
-                info = this.InfoCurrent[evnt.Name];
-                //queue = this.InfoTrace[evnt.Name]; 
+                list = this.InfoTrace[evnt.Name];
             }
             else
             {
-                info = new EnemyInfo();
-                this.InfoCurrent.Add(evnt.Name, info);
-
-                //queue = new Queue<EnemyInfo>(); 
-                //this.InfoTrace.Add(evnt.Name, queue);
+                list = new Stack<EnemyInfo>(this.Capacity);
+                this.InfoTrace.Add(evnt.Name, list);
             }
-            
-            // update current instance 
+
             var angle = this.Robot.HeadingRadians + evnt.BearingRadians;
-            info.X = this.Robot.X + Math.Sin(angle) * evnt.Distance;
-            info.Y = this.Robot.Y + Math.Cos(angle) * evnt.Distance;
-            info.Velocity = evnt.Velocity;
-            info.Heading = evnt.Heading;
-            info.Bearing = evnt.Bearing;
-            info.Distance = evnt.Distance;
-            info.Energy = evnt.Energy;
+            var info = new EnemyInfo
+            {
+                X = this.Robot.X + Math.Sin(angle) * evnt.Distance,
+                Y = this.Robot.Y + Math.Cos(angle) * evnt.Distance,
+                Velocity = evnt.Velocity,
+                Heading = evnt.Heading,
+                Bearing = evnt.Bearing,
+                Distance = evnt.Distance,
+                Energy = evnt.Energy
+            };
+
+            //if (list.Count == this.Capacity)
+            //    list.Dequeue();
+
+            list.Push(info);
         }
+
+        #endregion
     }
 }

@@ -81,9 +81,9 @@
   <ItemGroup>
     <Compile Include="ARS3891.cs" />
     <Compile Include="Logger\EnemyInfo.cs" />
-    <Compile Include="Logger\BattleLog.cs" />
     <Compile Include="Debugger\VisualDebugger.cs" />
     <Compile Include="Base\RobotBase.cs" />
+    <Compile Include="Logger\EnemyLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils\" />

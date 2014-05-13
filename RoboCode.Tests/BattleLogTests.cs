@@ -12,7 +12,7 @@ namespace arusslabs.Tests
         public void OnScannedRobot()
         {
             var robot = new TestRobot();
-            var log = new BattleLog(robot);
+            var log = new EnemyLog(robot);
 
             robot.OnScannedRobot(new ScannedRobotEvent("Spanky", 11, 2.123, 22, 100, 3.12, false));
             robot.OnScannedRobot(new ScannedRobotEvent("Franky", 10, 12, 22, 1, 2, false));
@@ -26,7 +26,7 @@ namespace arusslabs.Tests
         public void OnRobotDeath()
         {
             var robot = new TestRobot();
-            var log = new BattleLog(robot);
+            var log = new EnemyLog(robot);
 
             robot.OnScannedRobot(new ScannedRobotEvent("Spanky", 11, 2.123, 22, 100, 3.12, false));
             robot.OnScannedRobot(new ScannedRobotEvent("Franky", 10, 12, 22, 1, 2, false));
@@ -42,7 +42,7 @@ namespace arusslabs.Tests
         public void ScanSequence()
         {
             var robot = new TestRobot();
-            var log = new BattleLog(robot, 4);
+            var log = new EnemyLog(robot, 4);
 
             robot.OnScannedRobot(new ScannedRobotEvent("Spanky", 11, 2.123, 22, 100, 3.12, false));
             robot.OnScannedRobot(new ScannedRobotEvent("Spanky", 12, 2.223, 22, 101, 3.22, false));
@@ -57,13 +57,13 @@ namespace arusslabs.Tests
             Assert.AreEqual(14, spankyLog[2].Energy);
             Assert.AreEqual(13, spankyLog[3].Energy);
         }
-        
+
         /* TODO: Implement limiting feature 
         [TestMethod]
         public void ScanLimit()
         {
             var robot = new TestRobot();
-            var log = new BattleLog(robot, 4);
+            var log = new EnemyLog(robot, 4);
 
             robot.OnScannedRobot(new ScannedRobotEvent("Spanky", 10, 12, 22, 1, 2, false));
             Assert.AreEqual(1, log.InfoTrace["Spanky"].Count);

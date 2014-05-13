@@ -13,7 +13,7 @@ namespace arusslabs
     public class ARS3891 : RobotBase
     {
         VisualDebugger vDebugger;
-        BattleLog log;
+        EnemyLog log;
         private bool dead = false;
 
         public override void Run()
@@ -21,7 +21,7 @@ namespace arusslabs
             // Black Mamba Mode 
             SetColors(Color.Black, Color.Black, Color.White);
 
-            this.log = new BattleLog(this, 500);
+            this.log = new EnemyLog(this, 500);
             this.vDebugger = new VisualDebugger(this);
 
             // Loop forever

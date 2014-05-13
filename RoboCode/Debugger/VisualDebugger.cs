@@ -3,6 +3,7 @@ using System.Drawing;
 using Robocode;
 using arusslabs.Base;
 using arusslabs.Logger;
+using System.Linq; 
 
 namespace arusslabs.Debugger
 {
@@ -20,7 +21,7 @@ namespace arusslabs.Debugger
 
         }
 
-        public void DrawLogMeta(BattleLog log, IGraphics graphics)
+        public void DrawLogMeta(EnemyLog log, IGraphics graphics)
         {
             var line = 0; 
             foreach (var kv in log.InfoTrace)

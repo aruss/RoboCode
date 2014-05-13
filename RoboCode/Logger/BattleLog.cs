@@ -5,13 +5,14 @@ using arusslabs.Base;
 
 namespace arusslabs.Logger
 {
-    public class BattleLog
+    public class EnemyLog
     {
         public IRobotBase Robot;
         public int Capacity;
         public IDictionary<string, Stack<EnemyInfo>> InfoTrace;
+        public LinkedList<Stack<EnemyInfo>> InfoTraceLru;  
 
-        public BattleLog(IRobotBase robot, int capacity = 100)
+        public EnemyLog(IRobotBase robot, int capacity = 100)
         {
             this.Robot = robot;
             this.Robot.RobotDeathEvent += this.OnRobotDeathEvent;
@@ -19,8 +20,38 @@ namespace arusslabs.Logger
 
             this.Capacity = capacity;
             this.InfoTrace = new Dictionary<string, Stack<EnemyInfo>>();
+            this.InfoTraceLru = new LinkedList<Stack<EnemyInfo>>();
         }
 
+        public void AddInfo(string name, EnemyInfo info)
+        {
+            // list
+            Stack<EnemyInfo> list;
+
+            if (this.InfoTrace.ContainsKey(name))
+            {
+                list = this.InfoTrace[name];
+            }
+            else
+            {
+                list = new Stack<EnemyInfo>(this.Capacity);
+                this.InfoTrace.Add(name, list);
+            }
+
+            //if (list.Count == this.Capacity)
+            //    list.Dequeue();
+
+            list.Push(info);
+
+            // Update lru list
+            if (this.InfoTraceLru.Contains(list))
+            {
+                this.InfoTraceLru.Remove(list);
+            }
+            this.InfoTraceLru.AddFirst(list);
+        }
+
+       
         #region private members
 
         private void OnRobotDeathEvent(IRobotBase sender, RobotDeathEvent evnt)
@@ -33,18 +64,6 @@ namespace arusslabs.Logger
 
         private void OnScannedRobotEvent(IRobotBase sender, ScannedRobotEvent evnt)
         {
-            Stack<EnemyInfo> list;
-
-            if (this.InfoTrace.ContainsKey(evnt.Name))
-            {
-                list = this.InfoTrace[evnt.Name];
-            }
-            else
-            {
-                list = new Stack<EnemyInfo>(this.Capacity);
-                this.InfoTrace.Add(evnt.Name, list);
-            }
-
             var angle = this.Robot.HeadingRadians + evnt.BearingRadians;
             var info = new EnemyInfo
             {
@@ -57,12 +76,9 @@ namespace arusslabs.Logger
                 Energy = evnt.Energy
             };
 
-            //if (list.Count == this.Capacity)
-            //    list.Dequeue();
-
-            list.Push(info);
+            this.AddInfo(evnt.Name, info);
         }
-
+        
         #endregion
     }
 }

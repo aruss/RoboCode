@@ -7,14 +7,6 @@ namespace arusslabs.Tests
 {
     public class TestRobot : IRobotBase
     {
-        public virtual double GunHeadingRadians { get; set; }
-
-        public virtual double HeadingRadians { get; set; }
-
-        public virtual double X { get; set; }
-
-        public virtual double Y { get; set; }
-
         public event BattleEndedEventHandler BattleEndedEvent;
         public virtual void OnBattleEnded(BattleEndedEvent e)
         {
@@ -217,5 +209,17 @@ namespace arusslabs.Tests
         {
             throw new NotImplementedException();
         }
+
+        public virtual double GunHeadingRadians { get; set; }
+
+        public virtual double HeadingRadians { get; set; }
+
+        public virtual double X { get; set; }
+
+        public virtual double Y { get; set; }
+
+        public double BattleFieldHeight { get; set; }
+
+        public double BattleFieldWidth { get; set; }
     }
 }

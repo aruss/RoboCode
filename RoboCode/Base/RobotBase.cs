@@ -39,11 +39,10 @@ namespace arusslabs.Base
         double HeadingRadians { get; }
         double X { get; }
         double Y { get; }
-
         double BattleFieldHeight { get; }
         double BattleFieldWidth { get; }
 
-        // add fields from AdvancedRobot implementation as required
+        // TODO: Add fields from AdvancedRobot implementation as required
     }
 
     public abstract class RobotBase : AdvancedRobot, IRobotBase

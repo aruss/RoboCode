@@ -58,6 +58,20 @@ namespace arusslabs.Tests
             Assert.AreEqual(13, spankyLog[3].Energy);
         }
 
+        [TestMethod]
+        public void PredictionTest()
+        {
+            var enemy = new TestRobot();
+
+            enemy.Velocity = 3;
+            enemy.Heading = 45;
+            enemy.X = 100;
+            enemy.Y = 100; 
+
+
+            
+        }
+
         /* TODO: Implement limiting feature 
         [TestMethod]
         public void ScanLimit()

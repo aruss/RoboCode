@@ -221,5 +221,42 @@ namespace arusslabs.Tests
         public double BattleFieldHeight { get; set; }
 
         public double BattleFieldWidth { get; set; }
+        
+        public long Time { get; set; }
+
+        public double Velocity { get; set; }
+
+        public double Width { get; set; }
+
+        public void Ahead(double distance)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Back(double distance)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DoNothing()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fire(double power)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public double GunCoolingRate { get; set; }
+
+        public double GunHeading { get; set; }
+
+        public double GunHeat { get; set; }
+
+        public double Heading { get; set; }
+
+        public double RadarHeading { get; set; }
     }
 }

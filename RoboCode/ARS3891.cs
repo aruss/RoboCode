@@ -10,6 +10,7 @@ using arusslabs.Logger;
 
 namespace arusslabs
 {
+    // http://students.seattleu.edu/clubs/compsci/robocode/blackknight2.html
     public class ARS3891 : RobotBase
     {
         VisualDebugger vDebugger;
@@ -20,6 +21,8 @@ namespace arusslabs
         {
             // Black Mamba Mode 
             SetColors(Color.Black, Color.Black, Color.White);
+
+
 
             this.log = new EnemyLog(this, 500);
             this.vDebugger = new VisualDebugger(this);
@@ -40,6 +43,7 @@ namespace arusslabs
 
         public override void OnScannedRobot(ScannedRobotEvent e)
         {
+            
             base.OnScannedRobot(e);
 
             // Calculate exact location of the robot
